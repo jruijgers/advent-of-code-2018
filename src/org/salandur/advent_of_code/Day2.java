@@ -21,10 +21,10 @@ public class Day2 {
         long containsLettersTwice = containsLettersTwice(result);
         long containsLettersThreeTimes = containsLettersThreeTimes(result);
 
-        System.out.println("Day 2.1: " + containsLettersThreeTimes * containsLettersTwice);
+        System.out.println("Day 2.1: calculated checksum: " + containsLettersThreeTimes * containsLettersTwice);
 
         List<String> boxesWithFabrics = findBoxesWithFabrics(Files.readAllLines(day2));
-        System.out.println("Day 2.2: " + getMatchingLetters(boxesWithFabrics.get(0), boxesWithFabrics.get(1)));
+        System.out.println("Day 2.2: letters of boxes with fabrics: " + getMatchingLetters(boxesWithFabrics.get(0), boxesWithFabrics.get(1)));
     }
 
     private static Map<Character, Integer> characterCounters(String string) {
