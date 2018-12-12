@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day3 {
     private static final Pattern CLAIM_PATTERN = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
@@ -28,6 +29,11 @@ public class Day3 {
         }
 
         System.out.printf("Day 3.1: number of fabric squares claimed multiple times: %d\n", claimedFabric.entrySet().stream().filter(e -> e.getValue().size() > 1).count());
+
+        // find the claim(s) without overlaps
+        Stream<FabricClaim> claimsWithoutOverlap = fabricClaims.stream().filter(fc -> fc.overlappingFabrics.size() == 0);
+
+        claimsWithoutOverlap.forEach(fc -> System.out.println("Day 3.2: claim without overlap: " + fc));
     }
 
     private static void printFabric(HashMap<Integer, List<FabricClaim>> claimedFabric) {
@@ -66,6 +72,8 @@ public class Day3 {
                 List<FabricClaim> list = fabric.getOrDefault(key, new ArrayList());
                 list.add(fabricClaim);
                 fabric.put(key, list);
+
+                list.stream().forEach(fabricClaim::addOverlappingFabric);
             }
         }
     }
@@ -77,12 +85,21 @@ public class Day3 {
         public final int width;
         public final int height;
 
+        private Set<FabricClaim> overlappingFabrics = new HashSet<>();
+
         private FabricClaim(String claimId, int left, int top, int width, int height) {
             this.claimId = claimId;
             this.left = left;
             this.top = top;
             this.width = width;
             this.height = height;
+        }
+
+        public void addOverlappingFabric(FabricClaim other) {
+            if (other != this) {
+                overlappingFabrics.add(other);
+                other.overlappingFabrics.add(this);
+            }
         }
 
         public String toString() {
