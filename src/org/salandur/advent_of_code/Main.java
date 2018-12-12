@@ -10,14 +10,18 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) throws IOException {
         Path day1 = Path.of("day1.txt");
-        int resultingFrequency = Files.
-                lines(day1).
-                parallel().
-                mapToInt(Integer::parseInt).
-                sum();
-        System.out.printf("1: Resulting frequency: %d\n", resultingFrequency);
+
+        System.out.printf("1: Resulting frequency: %d\n", findResultingFrequency(day1));
 
         System.out.printf("2: First repeated frequency: %d\n", findFirstRepeatingFrequency(day1));
+    }
+
+    private static int findResultingFrequency(Path day1) throws IOException {
+        return Files.
+                    lines(day1).
+                    parallel().
+                    mapToInt(Integer::parseInt).
+                    sum();
     }
 
     private static Integer findFirstRepeatingFrequency(Path adjustments) throws IOException {
