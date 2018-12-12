@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Main {
+public class Day1 {
     public static void main(String[] args) throws IOException {
         Path day1 = Path.of("day1.txt");
 
