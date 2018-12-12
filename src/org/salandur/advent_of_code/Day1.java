@@ -11,9 +11,9 @@ public class Day1 {
     public static void main(String[] args) throws IOException {
         Path day1 = Path.of("day1.txt");
 
-        System.out.printf("1: Resulting frequency: %d\n", findResultingFrequency(day1));
+        System.out.printf("Day 1.1: Resulting frequency: %d\n", findResultingFrequency(day1));
 
-        System.out.printf("2: First repeated frequency: %d\n", findFirstRepeatingFrequency(day1));
+        System.out.printf("Day 2.2: First repeated frequency: %d\n", findFirstRepeatingFrequency(day1));
     }
 
     private static int findResultingFrequency(Path day1) throws IOException {
