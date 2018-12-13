@@ -8,5 +8,6 @@ public class Main {
         Day2.main(args);
         Day3.main(args);
         Day4.main(args);
+        Day5.main(args);
     }
 }
