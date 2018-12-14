@@ -30,8 +30,10 @@ public class Day6 {
 
         SpacePoint bestSpacePoint = spacePoints.stream().filter(SpacePoint::isFinite).reduce(Day6::selectLargestSurface).get();
 
-        spacePoints.forEach(p -> System.out.println(p));
-        System.out.printf("Day 6.1: the largest area of %d is around %s\n", bestSpacePoint.associatedPoints.size(), bestSpacePoint);
+        System.out.printf("Day 6.1: the largest area of %d is around %dx%d\n", bestSpacePoint.associatedPoints.size(), bestSpacePoint.x, bestSpacePoint.y);
+
+        List<Integer> collect = points.stream().map(p -> sumOfDistances(p, spacePoints)).filter(i -> i < 10000).collect(toList());
+        System.out.printf("Day 6.2: the area with total distances less than 10,000 is %d\n", collect.size());
     }
 
     private static SpacePoint selectLargestSurface(SpacePoint sp1, SpacePoint sp2) {
@@ -68,6 +70,11 @@ public class Day6 {
     private static int findMinDistance(Map<SpacePoint, Integer> distances) {
         return distances.entrySet().stream().min((l, r) -> l.getValue() - r.getValue()).get().getValue();
     }
+
+    private static Integer sumOfDistances(Point point, List<SpacePoint> spacePoints) {
+        return spacePoints.stream().mapToInt(s -> manhattanDistance(point, s)).sum();
+    }
+
 
     private static class Point {
         protected final int x;
