@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.OptionalInt;
+import java.util.Stack;
 import java.util.stream.IntStream;
 
 public class Day5 {
@@ -23,7 +24,7 @@ public class Day5 {
     }
 
     private static int contractPolymer(String basePolymer, int skipChar) {
-        LinkedList<Character> chars = new LinkedList<>();
+        Stack<Character> chars = new Stack<>();
         basePolymer.chars().forEach(currentChar -> {
             char previousChar = chars.size() == 0 ? 0 : chars.peek();
 
