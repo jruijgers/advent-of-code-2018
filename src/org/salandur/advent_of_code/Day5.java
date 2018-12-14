@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedList;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 public class Day5 {
     public static void main(String[] args) throws IOException {
@@ -11,24 +13,28 @@ public class Day5 {
 
         String basePolymer = Files.readAllLines(data).get(0);
 
-        LinkedList<Character> chars = contractPolymer(basePolymer);
+        int numberOfChars = contractPolymer(basePolymer, 0);
 
-        System.out.printf("Day 5.1: the polymer contracts to a length of %d\n", chars.size());
+        System.out.printf("Day 5.1: the polymer contracts to a length of %d\n", numberOfChars);
+
+        OptionalInt smallestCollapsedPolymer = IntStream.rangeClosed('a', 'z').map(c -> contractPolymer(basePolymer, c)).min();
+
+        System.out.printf("Day 5.2: the smallest polymer contracts to a length of %d\n", smallestCollapsedPolymer.getAsInt());
     }
 
-    private static LinkedList<Character> contractPolymer(String basePolymer) {
+    private static int contractPolymer(String basePolymer, int skipChar) {
         LinkedList<Character> chars = new LinkedList<>();
         basePolymer.chars().forEach(currentChar -> {
             char previousChar = chars.size() == 0 ? 0 : chars.peek();
 
             if (currentChar != previousChar && Character.toLowerCase(currentChar) == Character.toLowerCase(previousChar)) {
-                // we have the same char, in different case
+                // we have the same char, in different case, so remove it
                 chars.pop();
-            } else {
+            } else if (Character.toLowerCase(currentChar) != Character.toLowerCase(skipChar)) {
                 chars.push((char) currentChar);
             }
         });
 
-        return chars;
+        return chars.size();
     }
 }
