@@ -11,8 +11,13 @@ public class Day5 {
 
         String basePolymer = Files.readAllLines(data).get(0);
 
-        LinkedList<Character> chars = new LinkedList<>();
+        LinkedList<Character> chars = contractPolymer(basePolymer);
 
+        System.out.printf("Day 5.1: the polymer contracts to a length of %d\n", chars.size());
+    }
+
+    private static LinkedList<Character> contractPolymer(String basePolymer) {
+        LinkedList<Character> chars = new LinkedList<>();
         basePolymer.chars().forEach(currentChar -> {
             char previousChar = chars.size() == 0 ? 0 : chars.peek();
 
@@ -24,6 +29,6 @@ public class Day5 {
             }
         });
 
-        System.out.printf("Day 5.1: the polymer contracts to a length of %d\n", chars.size());
+        return chars;
     }
 }
