@@ -12,17 +12,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Day3 {
+public class Day03 {
     private static final Pattern CLAIM_PATTERN = Pattern.compile("#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)");
     private static final Integer FABRIC_WIDTH = 1000;
     private static final Integer FABRIC_HEIGHT = 1000;
 
     public static void main(String[] args) throws IOException {
-        List<String> day3input = Files.readAllLines(Path.of("day3.txt"));
+        List<String> day3input = Files.readAllLines(Path.of("day03.txt"));
 
         // discover amount of fabric claimed multiple times
-        List<FabricClaim> fabricClaims = day3input.stream().map(Day3::parseFabricClaim).collect(Collectors.toList());
-        HashMap<Integer, List<FabricClaim>> claimedFabric = fabricClaims.stream().collect(HashMap::new, Day3::claimFabric, (a, b) -> {});
+        List<FabricClaim> fabricClaims = day3input.stream().map(Day03::parseFabricClaim).collect(Collectors.toList());
+        HashMap<Integer, List<FabricClaim>> claimedFabric = fabricClaims.stream().collect(HashMap::new, Day03::claimFabric, (a, b) -> {});
 
         if (ArrayUtils.contains(args, "print-fabric-claims")) {
             printFabric(claimedFabric);

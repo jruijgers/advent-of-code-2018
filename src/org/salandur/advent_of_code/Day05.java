@@ -8,9 +8,9 @@ import java.util.OptionalInt;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
-public class Day5 {
+public class Day05 {
     public static void main(String[] args) throws IOException {
-        Path data = Path.of("day5.txt");
+        Path data = Path.of("day05.txt");
 
         String basePolymer = Files.readAllLines(data).get(0);
 

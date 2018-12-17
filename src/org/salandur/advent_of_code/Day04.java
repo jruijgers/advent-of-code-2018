@@ -12,18 +12,18 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
-public class Day4 {
+public class Day04 {
     private static final Pattern GUARD_STARTS_SHIFT = Pattern.compile("Guard #(\\d+) begins shift");
     private static final Pattern GUARD_FALLS_ASLEEP = Pattern.compile("00:(\\d{2})] falls asleep");
     private static final Pattern GUARD_WAKES_UP = Pattern.compile("00:(\\d{2})] wakes up");
 
     public static void main(String[] args) throws IOException {
-        Path data = Path.of("day4.txt");
+        Path data = Path.of("day04.txt");
 
-        List<GuardShift> allShifts = Files.lines(data).sorted().collect(Day4::new, Day4::accept, Day4::combine).shifts;
+        List<GuardShift> allShifts = Files.lines(data).sorted().collect(Day04::new, Day04::accept, Day04::combine).shifts;
 
         Map<Guard, List<GuardShift>> guards = allShifts.stream().collect(groupingBy(GuardShift::getGuard));
-        Map<Guard, Integer> totalSleepPerGuard = guards.entrySet().stream().collect(toMap(Map.Entry::getKey, Day4::totalGuardSleep));
+        Map<Guard, Integer> totalSleepPerGuard = guards.entrySet().stream().collect(toMap(Map.Entry::getKey, Day04::totalGuardSleep));
 
         Guard mostSleepingGuard = findKeyWithMax(totalSleepPerGuard);
         Map<Integer, Integer> guardSleepsOnMinute = sleepPerMinute(guards.get(mostSleepingGuard));
@@ -33,9 +33,9 @@ public class Day4 {
 
         System.out.printf("Day 4.1: Guard %s sleeps the most, at 00:%02d, %d times. Answer is %d\n", mostSleepingGuard, sleepsTheMostAt, timesAsleep, mostSleepingGuard.getId() * sleepsTheMostAt);
 
-        Map<Guard, Map<Integer, Integer>> guardSleepPerMinute = guards.entrySet().stream().collect(toMap(Map.Entry::getKey, Day4::sleepPerMinute));
-        Map<Integer, Map<Guard, Integer>> minuteGuardsSleep = guardSleepPerMinute.entrySet().stream().flatMap(Day4::toMinuteAndGuard).collect(toMap(Map.Entry::getKey, Day4::guardMinuteValueMapper, Day4::combineGuardMinutes));
-        Optional<Map.Entry<Integer, Map<Guard, Integer>>> guardsSleepsTheMostOnMinute = minuteGuardsSleep.entrySet().stream().reduce(Day4::reduceGuardsSleep);
+        Map<Guard, Map<Integer, Integer>> guardSleepPerMinute = guards.entrySet().stream().collect(toMap(Map.Entry::getKey, Day04::sleepPerMinute));
+        Map<Integer, Map<Guard, Integer>> minuteGuardsSleep = guardSleepPerMinute.entrySet().stream().flatMap(Day04::toMinuteAndGuard).collect(toMap(Map.Entry::getKey, Day04::guardMinuteValueMapper, Day04::combineGuardMinutes));
+        Optional<Map.Entry<Integer, Map<Guard, Integer>>> guardsSleepsTheMostOnMinute = minuteGuardsSleep.entrySet().stream().reduce(Day04::reduceGuardsSleep);
 
         mostSleepingGuard = findKeyWithMax(guardsSleepsTheMostOnMinute.get().getValue());
         timesAsleep = guardsSleepsTheMostOnMinute.get().getValue().get(mostSleepingGuard);
@@ -82,7 +82,7 @@ public class Day4 {
         return guardShift.sleepingMinutes.stream();
     }
 
-    private static void accept(Day4 results, String input) {
+    private static void accept(Day04 results, String input) {
         Matcher guardNumber = GUARD_STARTS_SHIFT.matcher(input);
         Matcher fallsAsleep = GUARD_FALLS_ASLEEP.matcher(input);
         Matcher wakesUp = GUARD_WAKES_UP.matcher(input);
@@ -107,10 +107,10 @@ public class Day4 {
     }
 
     private static Map<Integer, Integer> sleepPerMinute(List<GuardShift> guardShifts) {
-        return guardShifts.stream().flatMap(Day4::doSleepingMinuts).collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+        return guardShifts.stream().flatMap(Day04::doSleepingMinuts).collect(groupingBy(Function.identity(), summingInt(e -> 1)));
     }
 
-    private static void combine(Day4 left, Day4 right) {
+    private static void combine(Day04 left, Day04 right) {
         left.shifts.addAll(right.shifts);
     }
 

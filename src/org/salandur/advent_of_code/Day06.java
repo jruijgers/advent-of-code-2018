@@ -14,21 +14,21 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 
-public class Day6 {
+public class Day06 {
 
     public static final ManhattanDistance MANHATTAN_DISTANCE = new ManhattanDistance();
 
     public static void main(String[] args) throws IOException {
-        Path data = Path.of("day6.txt");
+        Path data = Path.of("day06.txt");
 
-        List<SpacePoint> spacePoints = Files.lines(data).filter(s -> s.length() > 0).map(Day6::parseDataPoint).collect(toList());
+        List<SpacePoint> spacePoints = Files.lines(data).filter(s -> s.length() > 0).map(Day06::parseDataPoint).collect(toList());
         int width = spacePoints.stream().mapToInt(p -> p.x).max().getAsInt();
         int height = spacePoints.stream().mapToInt(p -> p.y).max().getAsInt();
 
         List<Point> points = generateAllPoints(width, height).collect(toList());
         points.forEach(p -> manhattanDistance(p, spacePoints));
 
-        SpacePoint bestSpacePoint = spacePoints.stream().filter(SpacePoint::isFinite).reduce(Day6::selectLargestSurface).get();
+        SpacePoint bestSpacePoint = spacePoints.stream().filter(SpacePoint::isFinite).reduce(Day06::selectLargestSurface).get();
 
         System.out.printf("Day 6.1: the largest area of %d is around %dx%d\n", bestSpacePoint.associatedPoints.size(), bestSpacePoint.x, bestSpacePoint.y);
 

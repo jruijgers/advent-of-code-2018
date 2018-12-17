@@ -7,27 +7,27 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Day9 {
+public class Day09 {
 
     public static void main(String[] args) throws IOException {
-        List<String> data = Files.readAllLines(Path.of("day9.txt"));
+        List<String> data = Files.readAllLines(Path.of("day09.txt"));
 
-        data.forEach(Day9::runGames);
+        data.forEach(Day09::runGames);
     }
 
     private static void runGames(String description) {
         Matcher matcher = Pattern.compile("(\\d+) players; last marble is worth (\\d+) points").matcher(description);
 
         if (matcher.find()) {
-            Day9 game = new Day9(Integer.valueOf(matcher.group(1)), Integer.valueOf(matcher.group(2)));
+            Day09 game = new Day09(Integer.valueOf(matcher.group(1)), Integer.valueOf(matcher.group(2)));
             runGame( game);
 
-            Day9 game2 = new Day9(game.numberOfPlayers, game.numberOfMarbles * 100);
+            Day09 game2 = new Day09(game.numberOfPlayers, game.numberOfMarbles * 100);
             runGame( game2);
         }
     }
 
-    private static void runGame( Day9 game) {
+    private static void runGame( Day09 game) {
         game.runGame();
         System.out.printf("Day 9: the highest score for %d players and %d marbles is: %d\n", game.numberOfPlayers, game.numberOfMarbles, game.highScore());
     }
@@ -36,7 +36,7 @@ public class Day9 {
     private final int numberOfMarbles;
     private Map<Integer, Long> playerScores = new HashMap<>();
 
-    private Day9(int numberOfPlayers, int numberOfMarbles) {
+    private Day09(int numberOfPlayers, int numberOfMarbles) {
         this.numberOfPlayers = numberOfPlayers;
         this.numberOfMarbles = numberOfMarbles;
     }

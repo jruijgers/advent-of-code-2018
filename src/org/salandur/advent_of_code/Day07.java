@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public class Day7 {
+public class Day07 {
     private static final Pattern STEPS = Pattern.compile("Step ([A-Z]) must be finished before step ([A-Z]) can begin.");
 
     public static void main(String[] args) throws IOException {
         Map<String, Instruction> instructionsMap = new HashMap<>();
 
-        Files.lines(Path.of("day7.txt")).
+        Files.lines(Path.of("day07.txt")).
                 filter(StringUtils::isNotBlank).
                 forEach(s -> parseInstruction(s, instructionsMap));
 

@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Day1 {
+public class Day01 {
     public static void main(String[] args) throws IOException {
-        Path day1 = Path.of("day1.txt");
+        Path day1 = Path.of("day01.txt");
 
         System.out.printf("Day 1.1: Resulting frequency: %d\n", findResultingFrequency(day1));
 

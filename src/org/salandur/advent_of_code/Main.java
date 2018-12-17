@@ -4,14 +4,14 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Day1.main(args);
-        Day2.main(args);
-        Day3.main(args);
-        Day4.main(args);
-        Day5.main(args);
-        Day6.main(args);
-        Day7.main(args);
-        Day8.main(args);
-        Day9.main(args);
+        Day01.main(args);
+        Day02.main(args);
+        Day03.main(args);
+        Day04.main(args);
+        Day05.main(args);
+        Day06.main(args);
+        Day07.main(args);
+        Day08.main(args);
+        Day09.main(args);
     }
 }
