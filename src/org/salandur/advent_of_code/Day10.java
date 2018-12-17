@@ -22,6 +22,8 @@ public class Day10 {
             lights.stream().forEach(l -> l.move());
             // printLights(lights);
         }
+
+        System.out.println("Day 10.1: the message will read:");
         printLights(lights);
     }
 
