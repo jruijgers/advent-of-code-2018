@@ -19,6 +19,7 @@ public class Day8 {
         System.out.println(rootNode);
 
         System.out.printf("Day 8.1: the value of the license check: %d\n", rootNode.metadataChecksum());
+        System.out.printf("Day 8.2: the value of the root node: %d\n", rootNode.getNodeValue());
     }
 
     private static LicenseNode parseNodeFromData(Queue<Integer> licenseData) {
@@ -48,9 +49,29 @@ public class Day8 {
         }
 
         public int metadataChecksum() {
-            return metaData.stream().mapToInt(Integer::intValue).sum() +
+            return metadataValue() +
                     children.stream().mapToInt(LicenseNode::metadataChecksum).sum();
         }
 
+        private int metadataValue() {
+            return metaData.stream().mapToInt(Integer::intValue).sum();
+        }
+
+        public int getNodeValue() {
+            int nodeValue = 0;
+
+            if (children.isEmpty()) {
+                nodeValue += metadataValue();
+            } else {
+                for (Integer child : metaData) {
+                    if (children.size() >= child) {
+                        nodeValue += children.get(child - 1).getNodeValue();
+                    }
+                }
+            }
+
+            System.out.println(children.size() + "; " + metaData + " => " + nodeValue);
+            return nodeValue;
+        }
     }
 }
