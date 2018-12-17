@@ -18,13 +18,15 @@ public class Day10 {
     public static void main(String[] args) throws IOException {
         List<Light> lights = Files.lines(Path.of("day10.txt")).map(Day10::parseLight).collect(toList());
 
+        int elapsedSeconds = 0;
         while (getMessageHeight(lights) > 10) {
             lights.stream().forEach(l -> l.move());
-            // printLights(lights);
+            elapsedSeconds++;
         }
 
         System.out.println("Day 10.1: the message will read:");
         printLights(lights);
+        System.out.println("Day 10.2: the message appeared after " + elapsedSeconds + " seconds");
     }
 
     private static Light parseLight(String lightString) {
