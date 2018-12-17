@@ -16,7 +16,6 @@ public class Day08 {
         Queue<Integer> licenseData = Arrays.stream(StringUtils.split(licenseDataText)).map(Integer::valueOf).collect(toCollection(LinkedList::new));
 
         LicenseNode rootNode = parseNodeFromData(licenseData);
-        System.out.println(rootNode);
 
         System.out.printf("Day 8.1: the value of the license check: %d\n", rootNode.metadataChecksum());
         System.out.printf("Day 8.2: the value of the root node: %d\n", rootNode.getNodeValue());
@@ -70,7 +69,6 @@ public class Day08 {
                 }
             }
 
-            System.out.println(children.size() + "; " + metaData + " => " + nodeValue);
             return nodeValue;
         }
     }
