@@ -1,24 +1,35 @@
 package org.salandur.advent_of_code;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Day9 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        List<String> data = Files.readAllLines(Path.of("day9.txt"));
 
-        // Day9 game = new Day9(9, 25); // should score 32
-        // Day9 game = new Day9(10, 1618); // should score 8317
-        // Day9 game = new Day9(13, 7999); // should score 146373
-        Day9 game = new Day9(452, 70784);
-        runGame(1, game);
-
-        Day9 game2 = new Day9(game.numberOfPlayers, game.numberOfMarbles * 100);
-        runGame(2, game2);
+        data.forEach(Day9::runGames);
     }
 
-    private static void runGame(int exercise, Day9 game) {
+    private static void runGames(String description) {
+        Matcher matcher = Pattern.compile("(\\d+) players; last marble is worth (\\d+) points").matcher(description);
+
+        if (matcher.find()) {
+            Day9 game = new Day9(Integer.valueOf(matcher.group(1)), Integer.valueOf(matcher.group(2)));
+            runGame( game);
+
+            Day9 game2 = new Day9(game.numberOfPlayers, game.numberOfMarbles * 100);
+            runGame( game2);
+        }
+    }
+
+    private static void runGame( Day9 game) {
         game.runGame();
-        System.out.printf("Day 9.%d: the highest score for %,d players and %,d marbles is: %,d\n", exercise, game.numberOfPlayers, game.numberOfMarbles, game.highScore());
+        System.out.printf("Day 9: the highest score for %d players and %d marbles is: %d\n", game.numberOfPlayers, game.numberOfMarbles, game.highScore());
     }
 
     private final int numberOfPlayers;
@@ -47,9 +58,7 @@ public class Day9 {
                 currentPlayerScore += currentMarble + currentPosition.marbleValue;
                 playerScores.put(currentPlayer, currentPlayerScore);
 
-                currentPosition.left.right = currentPosition.right;
-                currentPosition.right.left = currentPosition.left;
-                currentPosition = currentPosition.right;
+                currentPosition = currentPosition.remove();
             } else {
                 currentPosition = new CircleLinkedList(currentMarble).insertAt(currentPosition.moveRight(2));
             }
@@ -74,6 +83,12 @@ public class Day9 {
             right.left = this;
 
             return this;
+        }
+
+        public CircleLinkedList remove() {
+            left.right = right;
+            right.left = left;
+            return right;
         }
 
         public CircleLinkedList moveLeft(int positions) {
