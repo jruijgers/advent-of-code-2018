@@ -3,27 +3,31 @@ package org.salandur.advent_of_code;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Day14 {
     public static void main(String[] args) {
         Day14 day14 = new Day14(2, "37");
 
-        day14.run(5);
-        day14.run(9);
-        day14.run(18);
-        day14.run(2018);
-        day14.run(47801);
+        // day14.run(5);
+        // day14.run("01245");
+        // System.out.println();
 
-        day14.run("01245");
-        day14.run("51589");
-        day14.run("92510");
-        day14.run("59414");
-        // day14.run("047801");
+        // day14.run(9);
+        // day14.run("51589");
+        // System.out.println();
+
+        // day14.run(18);
+        // day14.run("92510");
+        // System.out.println();
+
+        // day14.run(2018);
+        // day14.run("59414");
+        // System.out.println();
+
+        day14.run(47801);
+        day14.run("047801");
+        System.out.println();
     }
 
     private final int[] elfRecipe;
@@ -37,9 +41,7 @@ public class Day14 {
     }
 
     private Thread shutdownHook() {
-        return new Thread(() -> {
-            System.out.println("\nNumber of recipes: " + recipes.length());
-        });
+        return new Thread(() -> System.out.printf("Number of recipes: %,d", recipes.length()));
     }
 
     private void run(int numberOfRecipes) {
@@ -51,11 +53,31 @@ public class Day14 {
     }
 
     private void run(String sequence) {
-        while (recipes.length() < 1000000 && scoreString().indexOf(sequence) < 0) {
-            iterate();
+        if (scoreString().indexOf(sequence) < 0) {
+            int iteration = 1;
+            while (scoreString().indexOf(sequence) < 0) {
+                for (int i = 0; i < fibonacci(iteration); i++) {
+                    iterate();
+                }
+                iteration++;
+            }
         }
 
-        System.out.printf("Day 14.2: the score sequence '%s' appears for the first time after %d recipes (%d total)\n", sequence, scoreString().indexOf(sequence), recipes.length());
+        System.out.printf("Day 14.2: the score sequence '%s' appears for the first time after %d recipes (%,d total)\n", sequence, scoreString().indexOf(sequence), recipes.length());
+    }
+
+    private int fibonacci(int num) {
+        if (num <= 0) {
+            return 0;
+        }
+        int n1 = 0;
+        int n2 = 1;
+        for (int i = 1; i < num; i++) {
+            final int next = n2 + n1;
+            n1 = n2;
+            n2 = next;
+        }
+        return n2;
     }
 
     private String scoreString() {
