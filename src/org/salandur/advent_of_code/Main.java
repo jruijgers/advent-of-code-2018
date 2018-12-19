@@ -2,6 +2,7 @@ package org.salandur.advent_of_code;
 
 import org.salandur.advent_of_code.day12.Day12;
 import org.salandur.advent_of_code.day13.Day13;
+import org.salandur.advent_of_code.day15.Day15;
 
 import java.io.IOException;
 
@@ -21,5 +22,6 @@ public class Main {
         Day12.main(args);
         Day13.main(args);
         Day14.main(args);
+        Day15.main(args);
     }
 }
