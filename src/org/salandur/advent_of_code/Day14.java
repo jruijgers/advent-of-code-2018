@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class Day14 {
     public static void main(String[] args) {
-        Day14 day14 = new Day14(2, Arrays.asList(3, 7));
+        Day14 day14 = new Day14(2, "37");
 
         day14.run(9);
         day14.run(5);
@@ -19,7 +19,6 @@ public class Day14 {
         day14.run(2018);
         day14.run(47801);
 
-        // day14 = new Day14(2, Arrays.asList(3, 7));
         day14.run("51589");
         day14.run("01245");
         day14.run("92510");
@@ -28,27 +27,38 @@ public class Day14 {
     }
 
     private final int[] elfRecipe;
-    private final List<Integer> recipes;
+    private final StringBuilder recipes;
 
-    public Day14(int numberOfElves, List<Integer> initalRecipies) {
+    public Day14(int numberOfElves, String initialRecipes) {
         elfRecipe = IntStream.range(0, numberOfElves).toArray();
-        recipes = new ArrayList<>(initalRecipies);
+        recipes = new StringBuilder(initialRecipes);
+
+        Runtime.getRuntime().addShutdownHook(shutdownHook());
+    }
+
+    private Thread shutdownHook() {
+        return new Thread(() -> {
+            System.out.println("\nNumber of recipes: " + recipes.length());
+        });
     }
 
     private void run(int numberOfRecipes) {
-        while (recipes.size() < numberOfRecipes + 10) {
+        while (recipes.length() < numberOfRecipes + 10) {
             iterate();
         }
 
-        System.out.printf("Day 14.1: after %d recipes, the last 10 scores are: %s\n", numberOfRecipes, StringUtils.join(recipes.subList(numberOfRecipes, 10 + numberOfRecipes), ""));
+        System.out.printf("Day 14.1: after %d recipes, the last 10 scores are: %s\n", numberOfRecipes, recipes.substring(numberOfRecipes, 10 + numberOfRecipes), "");
     }
 
     private void run(String sequence) {
-        while(recipes.size() < 250000 && scoreString().indexOf(sequence) < 0) {
+        int loops = 0;
+        while (recipes.length() < 1000000 && scoreString().indexOf(sequence) < 0) {
             iterate();
+
+            if (loops++ % 1000 == 0) System.out.print(".");
         }
 
-        System.out.printf("Day 14.2: the score sequence '%s' appears for the first time after %d recipes (%d total)\n", sequence, scoreString().indexOf(sequence), recipes.size());
+        System.out.printf("Day 14.2: the score sequence '%s' appears for the first time after %d recipes (%d total)\n", sequence, scoreString().indexOf(sequence), recipes.length());
     }
 
     private String scoreString() {
@@ -56,15 +66,15 @@ public class Day14 {
     }
 
     private void printRecipes() {
-        for (int i = 0; i < recipes.size(); i++) {
+        for (int i = 0; i < recipes.length(); i++) {
             int elf = ArrayUtils.indexOf(elfRecipe, i);
 
             if (elf == 0) {
-                System.out.printf("(%d)", recipes.get(i));
+                System.out.printf("(%d)", recipes.charAt(i));
             } else if (elf == 1) {
-                System.out.printf("[%d]", recipes.get(i));
+                System.out.printf("[%d]", recipes.charAt(i));
             } else {
-                System.out.printf(" %d ", recipes.get(i));
+                System.out.printf(" %d ", recipes.charAt(i));
             }
         }
         System.out.println();
@@ -75,19 +85,23 @@ public class Day14 {
         int recipeScore = calculateScore();
 
         // 2. add score to recipes -> 10+ gives 2 recipes
-        recipes.addAll(Integer.toString(recipeScore).chars().map(v -> Integer.valueOf("" + (char) v)).boxed().collect(Collectors.toList()));
+        recipes.append(recipeScore);
 
         // 3. select the next recipe for each elf
         for (int e = 0; e < elfRecipe.length; e++) {
-            elfRecipe[e] = (elfRecipe[e] + 1 + recipes.get(elfRecipe[e])) % recipes.size();
+            elfRecipe[e] = (elfRecipe[e] + 1 + getScore(elfRecipe[e])) % recipes.length();
         }
     }
 
     private int calculateScore() {
         int score = 0;
-        for (int e = 0; e < elfRecipe.length; e++) {
-            score += recipes.get(elfRecipe[e]);
+        for (int r : elfRecipe) {
+            score += getScore(r);
         }
         return score;
+    }
+
+    private int getScore(int position) {
+        return Integer.valueOf("" + recipes.charAt(position));
     }
 }
