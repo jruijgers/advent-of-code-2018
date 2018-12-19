@@ -13,17 +13,17 @@ public class Day14 {
     public static void main(String[] args) {
         Day14 day14 = new Day14(2, "37");
 
-        day14.run(9);
         day14.run(5);
+        day14.run(9);
         day14.run(18);
         day14.run(2018);
         day14.run(47801);
 
-        day14.run("51589");
         day14.run("01245");
+        day14.run("51589");
         day14.run("92510");
         day14.run("59414");
-        day14.run("047801");
+        // day14.run("047801");
     }
 
     private final int[] elfRecipe;
@@ -51,11 +51,8 @@ public class Day14 {
     }
 
     private void run(String sequence) {
-        int loops = 0;
         while (recipes.length() < 1000000 && scoreString().indexOf(sequence) < 0) {
             iterate();
-
-            if (loops++ % 1000 == 0) System.out.print(".");
         }
 
         System.out.printf("Day 14.2: the score sequence '%s' appears for the first time after %d recipes (%d total)\n", sequence, scoreString().indexOf(sequence), recipes.length());
@@ -70,11 +67,11 @@ public class Day14 {
             int elf = ArrayUtils.indexOf(elfRecipe, i);
 
             if (elf == 0) {
-                System.out.printf("(%d)", recipes.charAt(i));
+                System.out.printf("(%s)", recipes.charAt(i));
             } else if (elf == 1) {
-                System.out.printf("[%d]", recipes.charAt(i));
+                System.out.printf("[%s]", recipes.charAt(i));
             } else {
-                System.out.printf(" %d ", recipes.charAt(i));
+                System.out.printf(" %s ", recipes.charAt(i));
             }
         }
         System.out.println();
