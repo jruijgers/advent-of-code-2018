@@ -24,4 +24,9 @@ public class Main {
         Day14.main(args);
         Day15.main(args);
     }
+
+    public static void clearTerminal() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }
