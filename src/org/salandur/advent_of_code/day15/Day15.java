@@ -16,75 +16,25 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 
 public class Day15 {
-
-    public static final int WAIT = 250;
-
     public static void main(String[] args) throws IOException {
-        run("day15.txt");
+        // run("day15.example1.txt", 27730);
+        // run("day15.example2.txt", 36334);
+        // run("day15.example3.txt", 39514);
+        // run("day15.example4.txt", 27755);
+        // run("day15.example5.txt", 28944);
+        // run("day15.example6.txt", 18740);
+        // run("day15.chris.txt", 261855);
+        run("day15.txt", 231264); // not correct ,but don't know the correct score...
     }
 
-    private static void run(String dataFile) throws IOException {
+    private static void run(String dataFile, int expectedScore) throws IOException {
         Day15 day15 = new Day15();
         day15.parseDataFile(dataFile);
 
-        day15.run();
-    }
-
-    private void run() throws IOException {
-        int numberOfTurns = 0;
-        showAndStoreWorld(numberOfTurns, remainingHealth());
-
-        while (numberOfEnemyTypes() > 1) {
-            Instant start = Instant.now();
-            if (world.tick()) {
-                numberOfTurns++;
-            }
-            Duration duration = Duration.between(start, Instant.now());
-
-            showAndStoreWorld(numberOfTurns, remainingHealth());
-
-            if (duration.toMillis() < WAIT) {
-                sleep(WAIT - duration.toMillis());
-            }
+        int score = day15.run();
+        if (score != expectedScore) {
+            System.out.println("  expected score of " + expectedScore + ", got " + score);
         }
-
-        int remainingHealth = remainingHealth();
-        showAndStoreWorld(numberOfTurns, remainingHealth);
-
-        // sum the remaining health
-        System.out.printf("Total turns: %d, remaining health: %d, final score: %d\n", numberOfTurns-1, remainingHealth, (numberOfTurns - 1) * remainingHealth);
-        System.out.printf("Total turns: %d, remaining health: %d, final score: %d\n", numberOfTurns, remainingHealth, (numberOfTurns) * remainingHealth);
-        System.out.printf("Total turns: %d, remaining health: %d, final score: %d\n", numberOfTurns+1, remainingHealth, (numberOfTurns+1) * remainingHealth);
-    }
-
-    private void sleep(long i) {
-        try {
-            Thread.sleep(i);
-        } catch (InterruptedException e) {
-        }
-    }
-
-    private void showAndStoreWorld(int numberOfTurns, int remainingHealth) throws IOException {
-        String status = String.format("Turn: %d, remaining health: %d\n", numberOfTurns, remainingHealth);
-
-        Main.clearTerminal();
-        System.out.print(status);
-        System.out.println(world);
-
-        Files.createDirectories(Path.of("log", "day15"));
-        Path log = Path.of("log", "day15", "turn" + numberOfTurns + ".txt");
-        Files.write(log, status.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-        Files.write(log, world.toString().getBytes(), StandardOpenOption.APPEND);
-        Files.write(log, StringUtils.join(world.getUnits(), '\n').getBytes(), StandardOpenOption.APPEND);
-    }
-
-    private int remainingHealth() {
-        return world.getUnits().stream().mapToInt(Unit::getHealth).sum();
-    }
-
-    private int numberOfEnemyTypes() {
-        Map<Character, Long> numberOfEnemyTypes = world.getUnits().stream().collect(groupingBy(WorldElement::getIdentifier, Collectors.counting()));
-        return numberOfEnemyTypes.size();
     }
 
     private World world = new World();
@@ -98,4 +48,46 @@ public class Day15 {
         }
     }
 
+    private int run() {
+        int numberOfTurns = 0;
+
+        while (numberOfEnemyTypes() > 1) {
+            if (world.tick()) {
+                numberOfTurns++;
+            }
+        }
+
+        int remainingHealth = remainingHealth();
+
+        int score = numberOfTurns * remainingHealth;
+        System.out.printf("Total turns: %d, remaining health: %d, final score: %d\n", numberOfTurns, remainingHealth, score);
+        return score;
+    }
+
+    private void showAndStoreWorld(int numberOfTurns, int remainingHealth) {
+        String status = String.format("Turn: %d, remaining health: %d\n", numberOfTurns, remainingHealth);
+
+        Main.clearTerminal();
+        System.out.print(status);
+        System.out.println(world);
+
+        try {
+            Files.createDirectories(Path.of("log", "day15"));
+            Path log = Path.of("log", "day15", "turn" + numberOfTurns + ".txt");
+            Files.write(log, status.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(log, world.toString().getBytes(), StandardOpenOption.APPEND);
+            Files.write(log, StringUtils.join(world.getUnits(), '\n').getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int remainingHealth() {
+        return world.getUnits().stream().mapToInt(Unit::getHealth).sum();
+    }
+
+    private int numberOfEnemyTypes() {
+        Map<Character, Long> numberOfEnemyTypes = world.getUnits().stream().collect(groupingBy(WorldElement::getIdentifier, Collectors.counting()));
+        return numberOfEnemyTypes.size();
+    }
 }
