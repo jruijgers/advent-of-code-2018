@@ -67,7 +67,7 @@ public abstract class BaseUnit extends AbstractWorldElement implements Unit {
             List<Point> enemyAvailablePoints = getEnemies().flatMap(this::availableEnemyPoints).filter(WorldElement::isEmpty).sorted().collect(toList());
             if (enemyAvailablePoints.isEmpty()) return;
 
-            Optional<Dijkstra.Path> path = new Dijkstra(this, enemyAvailablePoints, world).findShortestPath();
+            Optional<PathFinder.Path> path = new PathFinder(this, enemyAvailablePoints, world).findShortestPath();
             if (path.isPresent()) {
                 this.x = path.get().firstStep().x();
                 this.y = path.get().firstStep().y();

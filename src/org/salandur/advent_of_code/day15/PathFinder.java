@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 
 import static org.salandur.advent_of_code.day15.Direction.DIRECTIONS;
 
-public class Dijkstra {
+public class PathFinder {
     private final Unit unit;
     private final List<Point> enemies;
     private final World world;
 
-    public Dijkstra(Unit unit, List<Point> enemies, World world) {
+    public PathFinder(Unit unit, List<Point> enemies, World world) {
         this.unit = unit;
         this.enemies = enemies;
         this.world = world;
