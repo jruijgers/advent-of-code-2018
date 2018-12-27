@@ -28,7 +28,7 @@ public class Day16 {
     private Day16 processSamples(String input) throws IOException {
         Files.lines(Path.of(input)).forEach(this::processLine);
 
-        System.out.printf("Day16.1: samples with 3 or more opcodes: %d\n", samplesWith3OrMoreOpCodes);
+        System.out.printf("Day 16.1: samples with 3 or more opcodes: %d\n", samplesWith3OrMoreOpCodes);
 
         return this;
     }
