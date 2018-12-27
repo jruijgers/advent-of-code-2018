@@ -3,6 +3,7 @@ package org.salandur.advent_of_code;
 import org.salandur.advent_of_code.day12.Day12;
 import org.salandur.advent_of_code.day13.Day13;
 import org.salandur.advent_of_code.day15.Day15;
+import org.salandur.advent_of_code.day16.Day16;
 
 import java.io.IOException;
 
@@ -23,6 +24,7 @@ public class Main {
         Day13.main(args);
         Day14.main(args);
         Day15.main(args);
+        Day16.main(args);
     }
 
     public static void clearTerminal() {
