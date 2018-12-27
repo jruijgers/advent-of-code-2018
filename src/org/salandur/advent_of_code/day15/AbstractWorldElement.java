@@ -1,10 +1,11 @@
 package org.salandur.advent_of_code.day15;
 
-public abstract class AbstractWorldElement extends PointImpl implements WorldElement {
+import org.salandur.advent_of_code.common.Point;
+
+public abstract class AbstractWorldElement extends Point implements WorldElement {
     AbstractWorldElement(int x, int y) {
         super(x, y);
     }
-
 
     @Override
     public boolean isEmpty() {

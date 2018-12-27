@@ -1,9 +1,10 @@
 package org.salandur.advent_of_code.day15;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import org.salandur.advent_of_code.common.Point;
 
-import static java.util.stream.Collectors.groupingBy;
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.util.stream.Collectors.toList;
 
 public class World {
@@ -53,7 +54,7 @@ public class World {
         StringBuilder b = new StringBuilder();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                b.append(findElement(new PointImpl(x, y)).getIdentifier());
+                b.append(findElement(new Point(x, y)).getIdentifier());
             }
             b.append('\n');
         }

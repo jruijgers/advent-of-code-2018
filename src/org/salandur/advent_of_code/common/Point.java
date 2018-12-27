@@ -1,42 +1,43 @@
-package org.salandur.advent_of_code.day15;
+package org.salandur.advent_of_code.common;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
-import java.util.List;
 import java.util.Objects;
 
-public class PointImpl implements Point, Comparable<Point> {
+public class Point implements Comparable<Point> {
 
     int x;
     int y;
 
-    public PointImpl(int x, int y) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    @Override
     public int x() {
         return x;
     }
 
-    @Override
     public int y() {
         return y;
     }
 
-    @Override
+    protected void setX(int x) {
+        this.x = x;
+    }
+
+    protected void setY(int y) {
+        this.y = y;
+    }
+
     public double[] getCoordinates() {
         return new double[]{x, y};
     }
 
-    @Override
     public Point move(Point direction) {
-        PointImpl moved = new PointImpl(x + direction.x(), y + direction.y());
-        return moved;
+        return new Point(x + direction.x(), y + direction.y());
     }
 
-    @Override
     public boolean isOn(Point other) {
         // System.out.println("comparing "+ this + " to " + other);
         return this.x == other.x() && this.y == other.y();
@@ -55,8 +56,8 @@ public class PointImpl implements Point, Comparable<Point> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PointImpl)) return false;
-        PointImpl point = (PointImpl) o;
+        if (!(o instanceof Point)) return false;
+        Point point = (Point) o;
         return x == point.x &&
                 y == point.y;
     }

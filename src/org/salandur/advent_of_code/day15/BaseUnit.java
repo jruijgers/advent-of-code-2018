@@ -9,12 +9,12 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static org.salandur.advent_of_code.day15.Direction.DIRECTIONS;
+import static org.salandur.advent_of_code.common.Direction.DIRECTIONS;
 
 public abstract class BaseUnit extends AbstractWorldElement implements Unit {
     public static final ManhattanDistance MANHATTAN_DISTANCE = new ManhattanDistance();
 
-    private static int manhattanDistance(Point left, Point right) {
+    private static int manhattanDistance(Unit left, Unit right) {
         return (int) MANHATTAN_DISTANCE.compute(left.getCoordinates(), right.getCoordinates());
     }
 
@@ -64,13 +64,13 @@ public abstract class BaseUnit extends AbstractWorldElement implements Unit {
 
     private void move() {
         if (!isNextToEnemy()) {
-            List<Point> enemyAvailablePoints = getEnemies().flatMap(this::availableEnemyPoints).filter(WorldElement::isEmpty).sorted().collect(toList());
+            List<WorldElement> enemyAvailablePoints = getEnemies().flatMap(this::availableEnemyPoints).filter(WorldElement::isEmpty).sorted().collect(toList());
             if (enemyAvailablePoints.isEmpty()) return;
 
             Optional<PathFinder.Path> path = new PathFinder(this, enemyAvailablePoints, world).findShortestPath();
             if (path.isPresent()) {
-                this.x = path.get().firstStep().x();
-                this.y = path.get().firstStep().y();
+                this.setX(path.get().firstStep().x());
+                this.setY(path.get().firstStep().y());
             }
         }
     }
@@ -119,7 +119,7 @@ public abstract class BaseUnit extends AbstractWorldElement implements Unit {
     private static class UnitComparator implements Comparator<Unit> {
         @Override
         public int compare(Unit l, Unit r) {
-            return new CompareToBuilder().append(l.getHealth(), r.getHealth()).append(l.y(), r.y()).append(l.x(), r.x()).toComparison();
+            return new CompareToBuilder().append(l.getHealth(), r.getHealth()).append(((BaseUnit)l).y(), ((BaseUnit) r).y()).append(((BaseUnit) l).x(), ((BaseUnit) r).x()).toComparison();
         }
 
     }
