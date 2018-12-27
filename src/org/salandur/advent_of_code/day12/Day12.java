@@ -38,10 +38,7 @@ public class Day12 {
     private static void runForGenerations(long totalGenerations, List<Pot> pots, List<Rule> rules) {
         for (long generation = 1; generation <= totalGenerations; generation++) {
             pots = nextGeneration(pots, rules);
-            if (generation % 1000 == 0) printPots(pots);
         }
-
-        printPots(pots);
 
         printDayResult(totalGenerations, getCount(pots), getSum(pots));
     }

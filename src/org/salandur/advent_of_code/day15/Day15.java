@@ -60,7 +60,7 @@ public class Day15 {
         int remainingHealth = remainingHealth();
 
         int score = numberOfTurns * remainingHealth;
-        System.out.printf("Total turns: %d, remaining health: %d, final score: %d\n", numberOfTurns, remainingHealth, score);
+        System.out.printf("Day 15.1: Total complete turns: %d, remaining health: %d, final score: %d\n", numberOfTurns, remainingHealth, score);
         return score;
     }
 

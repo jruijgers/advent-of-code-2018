@@ -27,7 +27,6 @@ public class Day14 {
 
         day14.run(47801);
         day14.run("047801");
-        System.out.println();
     }
 
     private final int[] elfRecipe;
