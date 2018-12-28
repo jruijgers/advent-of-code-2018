@@ -37,7 +37,7 @@ public class Day15 {
         // run("day15.reddit10.txt", 14740);
 
         // run("day15.chris.txt", 261855);
-        run("day15.txt", 231264); // not correct, but don't know the correct score...
+        run("day15.txt", 250648);
     }
 
     private static void run(String dataFile, int expectedScore) throws IOException {
