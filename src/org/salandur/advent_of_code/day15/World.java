@@ -34,20 +34,20 @@ public class World {
         return elements.stream().filter(e -> e.equals(p)).filter(AbstractWorldElement::isAvailable).findAny().orElse(new EmptySpace(p.x(), p.y()));
     }
 
-    public void parseLocation(char identifier, int x, int y) {
+    public void parseLocation(char identifier, int x, int y, int elfAttackPower) {
         width = Math.max(width, x + 1);
         height = Math.max(height, y + 1);
 
         if ('#' == identifier) {
             elements.add(new Wall(x, y));
         } else {
-            parseUnit(identifier, x, y);
+            parseUnit(identifier, x, y, elfAttackPower);
         }
     }
 
-    private void parseUnit(char identifier, int x, int y) {
+    private void parseUnit(char identifier, int x, int y, int elfAttackPower) {
         if ('E' == identifier) {
-            elements.add(new Elf(x, y, this));
+            elements.add(new Elf(x, y, elfAttackPower, this));
         } else if ('G' == identifier) {
             elements.add(new Goblin(x, y, this));
         }

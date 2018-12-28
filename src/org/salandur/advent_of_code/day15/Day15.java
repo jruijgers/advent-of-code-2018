@@ -41,42 +41,70 @@ public class Day15 {
     }
 
     private static void run(String dataFile, int expectedScore) throws IOException {
+        int elfAttackPower = 3;
         Day15 day15 = new Day15();
-        day15.parseDataFile(dataFile);
+        day15.parseDataFile(dataFile, elfAttackPower);
 
-        int score = day15.run();
+        long numberOfElves = day15.numberOfElves();
+
+        day15.run(numberOfElves, false);
+
+        int remainingHealth = day15.remainingHealth();
+        int score = day15.numberOfTurns * remainingHealth;
+
+        System.out.printf("Day 15.1: Total complete turns: %d, remaining health: %d, final score: %d\n", day15.numberOfTurns, remainingHealth, score);
+
         if (score != expectedScore) {
             System.out.println("  expected score of " + expectedScore + ", got " + score);
         }
+
+        boolean elvesDied;
+        elfAttackPower = 4;
+        do {
+            day15 = new Day15();
+            day15.parseDataFile(dataFile, elfAttackPower);
+            day15.run(numberOfElves, true);
+
+            // after the battle, get the number of elves remaining
+            elvesDied = day15.numberOfElves() < numberOfElves;
+            if (elvesDied) elfAttackPower++;
+        } while (elvesDied);
+
+        remainingHealth = day15.remainingHealth();
+        score = day15.numberOfTurns * remainingHealth;
+
+        System.out.printf("Day 15.2: Total complete turns: %d, remaining health: %d, final score: %d with elf attack power %d\n", day15.numberOfTurns, remainingHealth, score, elfAttackPower);
+    }
+
+    private long numberOfElves() {
+        return world.getUnits().stream().filter(u -> u instanceof Elf).count();
     }
 
     private World world = new World();
+    private int numberOfTurns;
 
-    private void parseDataFile(String dataFile) throws IOException {
+    private void parseDataFile(String dataFile, int elfAttackPower) throws IOException {
         List<String> dataLines = Files.readAllLines(Path.of(dataFile));
         for (int y = 0; y < dataLines.size(); y++) {
             for (int x = 0; x < dataLines.get(y).length(); x++) {
-                world.parseLocation(dataLines.get(y).charAt(x), x, y);
+                world.parseLocation(dataLines.get(y).charAt(x), x, y, elfAttackPower);
             }
         }
     }
 
-    private int run() {
-        int numberOfTurns = 0;
+    private void run(long numberOfElves, boolean stopWhenElfDies) {
+        numberOfTurns = 0;
 
         while (numberOfEnemyTypes() > 1) {
             if (world.tick()) {
                 numberOfTurns++;
             }
 
+            if (stopWhenElfDies && numberOfElves() < numberOfElves) {
+                return;
+            }
             // showAndStoreWorld(numberOfTurns, remainingHealth());
         }
-
-        int remainingHealth = remainingHealth();
-
-        int score = numberOfTurns * remainingHealth;
-        System.out.printf("Day 15.1: Total complete turns: %d, remaining health: %d, final score: %d\n", numberOfTurns, remainingHealth, score);
-        return score;
     }
 
     private void showAndStoreWorld(int numberOfTurns, int remainingHealth) {

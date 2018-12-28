@@ -21,7 +21,7 @@ public abstract class BaseUnit extends AbstractWorldElement implements Unit {
     private final World world;
 
     private int health = 200;
-    private int attackPower = 3;
+    int attackPower = 3;
 
     public BaseUnit(int x, int y, World world) {
         super(x, y);
