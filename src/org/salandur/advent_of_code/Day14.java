@@ -36,11 +36,11 @@ public class Day14 {
         elfRecipe = IntStream.range(0, numberOfElves).toArray();
         recipes = new StringBuilder(initialRecipes);
 
-        Runtime.getRuntime().addShutdownHook(shutdownHook());
+        // Runtime.getRuntime().addShutdownHook(shutdownHook());
     }
 
     private Thread shutdownHook() {
-        return new Thread(() -> System.out.printf("Number of recipes: %,d", recipes.length()));
+        return new Thread(() -> System.out.printf("Number of recipes: %,d\n", recipes.length()));
     }
 
     private void run(int numberOfRecipes) {
