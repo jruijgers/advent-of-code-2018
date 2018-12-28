@@ -1,9 +1,10 @@
-package org.salandur.advent_of_code.day16;
+package org.salandur.advent_of_code;
 
 import org.apache.commons.lang3.StringUtils;
+import org.salandur.advent_of_code.time_travel_watch.OpCode;
+import org.salandur.advent_of_code.time_travel_watch.Registers;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;

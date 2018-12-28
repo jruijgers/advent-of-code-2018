@@ -1,6 +1,5 @@
-package org.salandur.advent_of_code.day16;
+package org.salandur.advent_of_code.time_travel_watch;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class OpCode {
