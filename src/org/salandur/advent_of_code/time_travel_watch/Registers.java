@@ -3,9 +3,14 @@ package org.salandur.advent_of_code.time_travel_watch;
 import java.util.Arrays;
 
 public final class Registers {
-    private final Integer[] registers = new Integer[4];
+    private final Integer[] registers;
 
     public Registers() {
+        this(4);
+    }
+
+    public Registers(int numberOfRegisters) {
+        registers = new Integer[numberOfRegisters];
         reset();
     }
 
@@ -18,13 +23,13 @@ public final class Registers {
     }
 
     public void set(Integer[] values) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < registers.length; i++) {
             registers[i] = values[i];
         }
     }
 
     public Integer[] getState() {
-        return Arrays.copyOf(registers, 4);
+        return Arrays.copyOf(registers, registers.length);
     }
 
     @Override
@@ -33,6 +38,8 @@ public final class Registers {
     }
 
     public void reset() {
-        set(new Integer[]{0, 0, 0, 0});
+        for (int i = 0; i < registers.length; i++) {
+            registers[i] = 0;
+        }
     }
 }
