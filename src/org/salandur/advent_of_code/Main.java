@@ -28,6 +28,7 @@ public class Main {
         Day16.main(args);
         Day17.main(args);
         Day18.main(args);
+        Day19.main(args);
     }
 
     public static void clearTerminal() {
