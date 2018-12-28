@@ -23,6 +23,19 @@ public class Day15 {
         // run("day15.example4.txt", 27755);
         // run("day15.example5.txt", 28944);
         // run("day15.example6.txt", 18740);
+
+        // Reddit: https://github.com/ShaneMcC/aoc-2018/tree/master/15/tests
+        // run("day15.reddit1.txt", 13400);
+        // run("day15.reddit2.txt", 13987);
+        // run("day15.reddit3.txt", 10325);
+        // run("day15.reddit4.txt", 10804);
+        // run("day15.reddit5.txt", 10620);
+        // run("day15.reddit6.txt", 16932);
+        // run("day15.reddit7.txt", 10234);
+        // run("day15.reddit8.txt", 10430);
+        // run("day15.reddit9.txt", 12744);
+        // run("day15.reddit10.txt", 14740);
+
         // run("day15.chris.txt", 261855);
         run("day15.txt", 231264); // not correct, but don't know the correct score...
     }
@@ -55,6 +68,8 @@ public class Day15 {
             if (world.tick()) {
                 numberOfTurns++;
             }
+
+            // showAndStoreWorld(numberOfTurns, remainingHealth());
         }
 
         int remainingHealth = remainingHealth();
@@ -70,16 +85,18 @@ public class Day15 {
         Main.clearTerminal();
         System.out.print(status);
         System.out.println(world);
+        System.out.println(world.getUnits());
+        System.console().readLine();
 
-        try {
-            Files.createDirectories(Path.of("log", "day15"));
-            Path log = Path.of("log", "day15", "turn" + numberOfTurns + ".txt");
-            Files.write(log, status.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            Files.write(log, world.toString().getBytes(), StandardOpenOption.APPEND);
-            Files.write(log, StringUtils.join(world.getUnits(), '\n').getBytes(), StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     Files.createDirectories(Path.of("log", "day15"));
+        //     Path log = Path.of("log", "day15", "turn" + numberOfTurns + ".txt");
+        //     Files.write(log, status.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        //     Files.write(log, world.toString().getBytes(), StandardOpenOption.APPEND);
+        //     Files.write(log, StringUtils.join(world.getUnits(), '\n').getBytes(), StandardOpenOption.APPEND);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     private int remainingHealth() {
