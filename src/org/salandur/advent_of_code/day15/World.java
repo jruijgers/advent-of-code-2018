@@ -14,11 +14,14 @@ public class World {
     private int height = 0;
 
     public boolean tick() {
-        for (Unit u : getUnits()) {
-            if (noMoreEnemies(u)) {
-                return false;
+        List<Unit> units = getUnits();
+        for (Unit u : units) {
+            if (u.isAlive()) {
+                if (noMoreEnemies(u)) {
+                    return false;
+                }
+                u.tick();
             }
-            u.tick();
         }
         return true;
     }
