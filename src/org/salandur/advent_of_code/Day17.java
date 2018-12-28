@@ -55,10 +55,10 @@ public class Day17 {
 
         minY = groundCompound.keySet().stream().mapToInt(Integer::intValue).min().getAsInt();
         maxY = groundCompound.keySet().stream().mapToInt(Integer::intValue).max().getAsInt();
-        minX = groundCompound.values().stream().flatMapToInt(m -> m.keySet().stream().mapToInt(Integer::intValue)).min().getAsInt()-1;
-        maxX = groundCompound.values().stream().flatMapToInt(m -> m.keySet().stream().mapToInt(Integer::intValue)).max().getAsInt()+1;
+        minX = groundCompound.values().stream().flatMapToInt(m -> m.keySet().stream().mapToInt(Integer::intValue)).min().getAsInt() - 1;
+        maxX = groundCompound.values().stream().flatMapToInt(m -> m.keySet().stream().mapToInt(Integer::intValue)).max().getAsInt() + 1;
 
-         source = new WaterFlow(new Point(500, minY - 1), null);
+        source = new WaterFlow(new Point(500, minY - 1), null);
         current = source;
 
         return this;
@@ -66,16 +66,22 @@ public class Day17 {
 
     private Day17 validate() {
         int numberOfWaterSquares = 0;
+        int numberOfStillWaterSquares = 0;
         for (int y = minY; y <= maxY; y++) {
             for (int x = minX; x <= maxX; x++) {
                 Character compound = getCompound(new Point(x, y));
                 if (compound == STILL_WATER || compound == FLOWING_WATER) {
                     numberOfWaterSquares++;
+
+                    if (compound == STILL_WATER) {
+                        numberOfStillWaterSquares++;
+                    }
                 }
             }
         }
 
         System.out.printf("Day 17.1: number of water squares is %d\n", numberOfWaterSquares);
+        System.out.printf("Day 17.2: number of still water squares is %d\n", numberOfStillWaterSquares);
 
         return this;
     }
