@@ -16,7 +16,11 @@ public class Day19 {
         // day19.parseInput("day19.example.txt");
         day19.parseInput("day19.txt");
 
+        day19.reset(0);
         day19.run();
+
+        day19.reset(1);
+        // day19.run(); // original program takes to long, don't execute!
     }
 
     private final Registers registers = new Registers(6);
@@ -24,6 +28,14 @@ public class Day19 {
     private long instructionsExecuted;
     private int instructionPointerRegister = 0;
     private int instructionPointer;
+
+    private void reset(int initialRegister0Value) {
+        registers.reset();
+        registers.set(0, initialRegister0Value);
+
+        instructionPointer = 0;
+        instructionsExecuted = 0;
+    }
 
     private void run() {
         // int print = 20000;
