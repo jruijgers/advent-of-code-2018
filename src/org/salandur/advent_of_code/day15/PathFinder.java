@@ -109,7 +109,11 @@ public class PathFinder {
             if (isShortThan(other)) {
                 return true;
             } else if (this.steps.size() == other.steps.size()) {
-                return firstStep().compareTo(other.firstStep()) < 0;
+                if (lastStep().compareTo(other.lastStep()) < 0){
+                    return true;
+                } else {
+                    return firstStep().compareTo(other.firstStep()) < 0;
+                }
             } else {
                 return false;
             }
