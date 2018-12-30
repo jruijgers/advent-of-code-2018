@@ -60,7 +60,7 @@ public class Day19 {
         }
 
         // System.out.println(registers);
-        System.out.printf("Day 19: the sum of dividers for %d is %d (%,d instructions executed)\n", registers.get(1), registers.get(2), instructionsExecuted);
+        System.out.printf("Day 19: the sum of dividers for %d is %d (%,d instructions executed)\n", registers.get(1), registers.get(0), instructionsExecuted);
     }
 
     private synchronized void printStatus() {
