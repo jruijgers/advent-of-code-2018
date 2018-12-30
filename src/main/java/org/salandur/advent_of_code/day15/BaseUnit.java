@@ -119,7 +119,7 @@ public abstract class BaseUnit extends AbstractWorldElement implements Unit {
     private static class UnitComparator implements Comparator<Unit> {
         @Override
         public int compare(Unit l, Unit r) {
-            return new CompareToBuilder().append(l.getHealth(), r.getHealth()).append(((BaseUnit)l).y(), ((BaseUnit) r).y()).append(((BaseUnit) l).x(), ((BaseUnit) r).x()).toComparison();
+            return new CompareToBuilder().append(l.getHealth(), r.getHealth()).append(((BaseUnit) l).y(), ((BaseUnit) r).y()).append(((BaseUnit) l).x(), ((BaseUnit) r).x()).toComparison();
         }
 
     }

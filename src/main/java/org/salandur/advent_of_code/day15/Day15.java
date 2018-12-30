@@ -1,14 +1,9 @@
 package org.salandur.advent_of_code.day15;
 
-import org.apache.commons.lang3.StringUtils;
 import org.salandur.advent_of_code.Main;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +21,8 @@ public class Day03 {
 
         // discover amount of fabric claimed multiple times
         List<FabricClaim> fabricClaims = day3input.stream().map(Day03::parseFabricClaim).collect(Collectors.toList());
-        HashMap<Integer, List<FabricClaim>> claimedFabric = fabricClaims.stream().collect(HashMap::new, Day03::claimFabric, (a, b) -> {});
+        HashMap<Integer, List<FabricClaim>> claimedFabric = fabricClaims.stream().collect(HashMap::new, Day03::claimFabric, (a, b) -> {
+        });
 
         if (ArrayUtils.contains(args, "print-fabric-claims")) {
             printFabric(claimedFabric);

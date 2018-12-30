@@ -1,7 +1,5 @@
 package org.salandur.advent_of_code.day12;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 import java.util.Optional;
 

@@ -50,7 +50,7 @@ public class Cart implements Comparable<Cart> {
     }
 
     public boolean isNotCrashed() {
-         return !isCrashed;
+        return !isCrashed;
     }
 
     public void setIsCrashed() {

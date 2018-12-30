@@ -18,10 +18,10 @@ public class Day01 {
 
     private static int findResultingFrequency(Path day1) throws IOException {
         return Files.
-                    lines(day1).
-                    parallel().
-                    mapToInt(Integer::parseInt).
-                    sum();
+                lines(day1).
+                parallel().
+                mapToInt(Integer::parseInt).
+                sum();
     }
 
     private static Integer findFirstRepeatingFrequency(Path adjustments) throws IOException {

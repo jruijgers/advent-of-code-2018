@@ -3,7 +3,6 @@ package org.salandur.advent_of_code;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedList;
 import java.util.OptionalInt;
 import java.util.Stack;
 import java.util.stream.IntStream;

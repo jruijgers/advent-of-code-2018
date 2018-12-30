@@ -1,7 +1,5 @@
 package org.salandur.advent_of_code.time_travel_watch;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;

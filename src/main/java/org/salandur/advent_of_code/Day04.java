@@ -56,7 +56,7 @@ public class Day04 {
     }
 
     private static Map<Guard, Integer> combineGuardMinutes(Map<Guard, Integer> u, Map<Guard, Integer> u1) {
-        for (Map.Entry<Guard, Integer> e:u1.entrySet()) {
+        for (Map.Entry<Guard, Integer> e : u1.entrySet()) {
             u.put(e.getKey(), e.getValue());
         }
         return u;

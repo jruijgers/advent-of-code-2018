@@ -4,8 +4,9 @@ import org.salandur.advent_of_code.Main;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 

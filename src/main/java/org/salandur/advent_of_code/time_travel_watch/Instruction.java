@@ -26,6 +26,6 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return opCode + "(" + inputA + "," + inputB + ","+output+")";
+        return opCode + "(" + inputA + "," + inputB + "," + output + ")";
     }
 }
