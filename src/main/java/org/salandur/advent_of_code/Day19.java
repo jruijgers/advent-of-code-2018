@@ -14,15 +14,15 @@ public class Day19 {
         Day19 day19 = new Day19();
 
         // day19.parseInput("day19.example.txt");
-        day19.parseInput("day19.txt");
+        day19.parseInput("src/main/resources/day19.txt");
         day19.reset(0);
         day19.run();
 
-        day19.parseInput("day19.2.txt");
+        day19.parseInput("src/main/resources/day19.2.txt");
         day19.reset(0);
         day19.run();
-        // day19.reset(1);
-        // day19.run(); // original program takes to long, don't execute!
+        day19.reset(1);
+        day19.run(); // original program takes to long, don't execute!
     }
 
     private final Registers registers = new Registers(6);
@@ -40,17 +40,18 @@ public class Day19 {
     }
 
     private void run() {
-        int print = 25;
+        int print = 50;
+        int loopPrint = 1000000;
         while (instructionPointer < instructions.size()) {
             synchronized (this) {
                 registers.set(instructionPointerRegister, instructionPointer);
 
-                if (instructionsExecuted < print)
+                if (instructionsExecuted < print || instructionsExecuted % loopPrint == 0)
                     System.out.printf("  [%,d]] IP[%2d] %s + %s ->", instructionsExecuted, instructionPointer, registers, instructions.get(instructionPointer));
 
                 instructions.get(instructionPointer).execute(registers);
 
-                if (instructionsExecuted < print)
+                if (instructionsExecuted < print || instructionsExecuted % loopPrint == 0)
                     System.out.println(registers);
 
                 instructionPointer = registers.get(instructionPointerRegister) + 1;

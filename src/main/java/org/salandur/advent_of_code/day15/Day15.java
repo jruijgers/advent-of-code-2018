@@ -37,7 +37,7 @@ public class Day15 {
         // run("day15.reddit10.txt", 14740);
 
         // run("day15.chris.txt", 261855);
-        run("day15.txt", 250648);
+        run("src/main/resources/day15.txt", 250648);
     }
 
     private static void run(String dataFile, int expectedScore) throws IOException {

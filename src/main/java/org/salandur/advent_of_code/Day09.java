@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Day09 {
 
     public static void main(String[] args) throws IOException {
-        List<String> data = Files.readAllLines(Path.of("day09.txt"));
+        List<String> data = Files.readAllLines(Path.of("src/main/resources/day09.txt"));
 
         data.forEach(Day09::runGames);
     }

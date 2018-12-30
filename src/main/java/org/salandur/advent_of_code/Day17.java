@@ -32,7 +32,7 @@ public class Day17 {
         // Files.createDirectories(Path.of("log", "day17"));
 
         Day17 day17 = new Day17();
-        day17.parseFile("day17.txt");
+        day17.parseFile("src/main/resources/day17.txt");
 
         // day17.printGround(Files.newOutputStream(Path.of("log", "day17", "start.txt"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING));
 

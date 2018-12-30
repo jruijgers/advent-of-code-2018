@@ -13,8 +13,8 @@ public class Day16 {
 
     public static void main(String[] args) throws IOException {
         new Day16().
-                processSamples("day16.samples.txt").
-                findOpCodes().run("day16.input.txt");
+                processSamples("src/main/resources/day16.samples.txt").
+                findOpCodes().run("src/main/resources/day16.input.txt");
     }
 
     private Registers registers = new Registers();

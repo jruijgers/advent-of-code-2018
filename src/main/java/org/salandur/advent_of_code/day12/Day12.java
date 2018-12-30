@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 
 public class Day12 {
     public static void main(String[] args) throws IOException {
-        List<String> data = Files.readAllLines(Path.of("day12.txt"));
+        List<String> data = Files.readAllLines(Path.of("src/main/resources/day12.txt"));
 
         List<Pot> pots = parsePots(data.remove(0));
 

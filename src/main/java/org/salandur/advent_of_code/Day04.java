@@ -18,7 +18,7 @@ public class Day04 {
     private static final Pattern GUARD_WAKES_UP = Pattern.compile("00:(\\d{2})] wakes up");
 
     public static void main(String[] args) throws IOException {
-        Path data = Path.of("day04.txt");
+        Path data = Path.of("src/main/resources/day04.txt");
 
         List<GuardShift> allShifts = Files.lines(data).sorted().collect(Day04::new, Day04::accept, Day04::combine).shifts;
 

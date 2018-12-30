@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 
 public class Day02 {
     public static void main(String[] args) throws IOException {
-        Path day2 = Path.of("day02.txt");
+        Path day2 = Path.of("src/main/resources/day02.txt");
 
         List<Map<Character, Integer>> result = Files.lines(day2).map(Day02::characterCounters).collect(toList());
         long containsLettersTwice = containsLettersTwice(result);

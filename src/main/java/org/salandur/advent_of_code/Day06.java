@@ -19,7 +19,7 @@ public class Day06 {
     public static final ManhattanDistance MANHATTAN_DISTANCE = new ManhattanDistance();
 
     public static void main(String[] args) throws IOException {
-        Path data = Path.of("day06.txt");
+        Path data = Path.of("src/main/resources/day06.txt");
 
         List<SpacePoint> spacePoints = Files.lines(data).filter(s -> s.length() > 0).map(Day06::parseDataPoint).collect(toList());
         int width = spacePoints.stream().mapToInt(p -> p.x).max().getAsInt();
