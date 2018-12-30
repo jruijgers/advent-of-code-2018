@@ -13,16 +13,16 @@ public class Day19 {
     public static void main(String[] args) throws IOException {
         Day19 day19 = new Day19();
 
-        // day19.parseInput("day19.example.txt");
-        day19.parseInput("src/main/resources/day19.txt");
-        day19.reset(0);
-        day19.run();
+        //day19.parseInput("src/main/resources/day19.example.txt");
 
-        day19.parseInput("src/main/resources/day19.2.txt");
+        // Original program
+        // day19.parseInput("src/main/resources/day19.txt");
+        // Optimized program
+        day19.parseInput("src/main/resources/day19.optimized.txt");
         day19.reset(0);
         day19.run();
         day19.reset(1);
-        day19.run(); // original program takes to long, don't execute!
+        day19.run(); // original program takes to long, only use with optimized program
     }
 
     private final Registers registers = new Registers(6);
@@ -40,26 +40,26 @@ public class Day19 {
     }
 
     private void run() {
-        int print = 50;
-        int loopPrint = 1000000;
+        // int print = 0;
+        // int loopPrint = 10000000;
         while (instructionPointer < instructions.size()) {
             synchronized (this) {
                 registers.set(instructionPointerRegister, instructionPointer);
 
-                if (instructionsExecuted < print || instructionsExecuted % loopPrint == 0)
-                    System.out.printf("  [%,d]] IP[%2d] %s + %s ->", instructionsExecuted, instructionPointer, registers, instructions.get(instructionPointer));
+                // if (instructionsExecuted <= print || instructionsExecuted % loopPrint == 0)
+                //     System.out.printf("  [%,d]] IP[%2d] %s + %s ->", instructionsExecuted, instructionPointer, registers, instructions.get(instructionPointer));
 
                 instructions.get(instructionPointer).execute(registers);
 
-                if (instructionsExecuted < print || instructionsExecuted % loopPrint == 0)
-                    System.out.println(registers);
+                // if (instructionsExecuted < print || instructionsExecuted % loopPrint == 0)
+                //     System.out.println(registers);
 
                 instructionPointer = registers.get(instructionPointerRegister) + 1;
                 instructionsExecuted++;
             }
         }
 
-        System.out.println(registers);
+        // System.out.println(registers);
         System.out.printf("Day 19: after executing the program register 0 contains %d (%,d instructions executed)\n", registers.get(0), instructionsExecuted);
     }
 

@@ -1,0 +1,51 @@
+   #jmp setup
+00 addi 4 25 4 # JMP :setup
+
+   #:start
+01 seti 2 9 2  # set A = 1
+   #:new_b_loop
+02 seti 2 9 3  # set B = 1
+
+   #:next_loop (3 - 12)
+03 mulr 2 3 5  # reg5 = A * B
+04 eqrr 5 1 5  # reg5 == X
+05 addr 5 4 4  # JMP :sumlogicif reg5==1
+06 seti 8 9 4  # JMP :next_z if reg5==0
+
+   #:sumlogic
+07 addr 2 0 0  # S = S + A
+08 seti 12 9 4  # JMP :next_a
+
+   #:next_z
+09 mulr 2 3 5  # reg5 = A * B
+10 gtrr 5 1 5  # reg5 > X
+11 addr 5 4 4  # JMP :next_a if reg5==1
+12 seti 19 9 4 # JMP :next_b if reg5==0
+
+   #:next_a
+13 addi 2 1 2  # A = A + 1
+14 muli 2 2 5  # R5 = A * 2
+15 gtrr 5 1 5  # reg5 (A * 2) > X?
+16 addr 5 4 4  # JMP :endprog if reg5==1
+17 seti 1 0 4  # JMP :new_b_loop if reg5==0
+
+   #:endprog
+18 addr 0 1 0  # S = S + X
+19 mulr 4 4 4
+
+   #:next_b
+20 addi 3 1 3  # B = B + 1
+21 muli 3 2 5  # reg5 = B * 2
+22 gtrr 5 1 5  # reg5 (B * 2) > X?
+23 addr 5 4 4  # JMP one instruction
+24 seti 2 9 4  # JMP :next_loop if reg5==0
+25 seti 12 9 4 # JMP :next_a (reg5==1)
+
+   #:setup
+26 seti 860 6 1 # X = 860
+27 eqri 0 0 5  # R0 == 1
+28 addr 4 5 4  # JMP :extra_setup if reg1==1
+29 seti 10551260 9 1  # X = 10551260
+   #:extra_setup
+30 seti 1 6 0  # S = 1
+31 seti 0 7 4  # JMP :start
