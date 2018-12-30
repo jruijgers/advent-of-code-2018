@@ -2,9 +2,9 @@
 00 addi 4 25 4 # JMP :setup
 
    #:start
-01 seti 2 9 2  # set A = 1
+01 seti 2 9 2  # set A = 2
    #:new_b_loop
-02 seti 2 9 3  # set B = 1
+02 seti 2 9 3  # set B = 2
 
    #:next_loop (3 - 12)
 03 mulr 2 3 5  # reg5 = A * B
