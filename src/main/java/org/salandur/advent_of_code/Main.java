@@ -6,6 +6,8 @@ import org.salandur.advent_of_code.day15.Day15;
 import org.salandur.advent_of_code.day18.Day18;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -40,6 +42,14 @@ public class Main {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             // eat it
+        }
+    }
+
+    public static Path pathFromClasspath(String file) throws IOException {
+        try {
+            return Path.of(Main.class.getResource(file).toURI());
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
         }
     }
 }

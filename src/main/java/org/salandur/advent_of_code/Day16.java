@@ -13,8 +13,8 @@ public class Day16 {
 
     public static void main(String[] args) throws IOException {
         new Day16().
-                processSamples("src/main/resources/day16.samples.txt").
-                findOpCodes().run("src/main/resources/day16.input.txt");
+                processSamples("/day16.samples.txt").
+                findOpCodes().run("/day16.input.txt");
     }
 
     private Registers registers = new Registers();
@@ -27,7 +27,7 @@ public class Day16 {
     private Map<Integer, List<OpCode>> sampleOpCodes = new HashMap<>();
 
     private Day16 processSamples(String input) throws IOException {
-        Files.lines(Path.of(input)).forEach(this::processLine);
+        Files.lines(Main.pathFromClasspath(input)).forEach(this::processLine);
 
         System.out.printf("Day 16.1: samples with 3 or more opcodes: %d\n", samplesWith3OrMoreOpCodes);
 
@@ -58,7 +58,7 @@ public class Day16 {
     private Day16 run(String input) throws IOException {
         registers.reset();
 
-        Files.lines(Path.of(input)).forEach(this::processLine);
+        Files.lines(Main.pathFromClasspath(input)).forEach(this::processLine);
 
         System.out.printf("Day 16.2: after running the test program, register 0 contains %d\n", registers.get(0));
 

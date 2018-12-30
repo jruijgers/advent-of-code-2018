@@ -70,7 +70,7 @@ public class Day19 {
     private void parseInput(String input) throws IOException {
         instructions.clear();
 
-        List<String> strings = Files.readAllLines(Path.of(input));
+        List<String> strings = Files.readAllLines(Main.pathFromClasspath(input));
 
         instructionPointerRegister = Integer.parseInt(strings.remove(0).substring(4));
 

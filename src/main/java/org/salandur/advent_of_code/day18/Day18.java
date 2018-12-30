@@ -100,7 +100,7 @@ public class Day18 {
 
     private Day18 parseFile(String input) throws IOException {
         List<List<Character>> map = new ArrayList<>();
-        for (String line : Files.readAllLines(Path.of(input))) {
+        for (String line : Files.readAllLines(Main.pathFromClasspath(input))) {
             List<Character> row = new ArrayList<>();
 
             for (char c : line.toCharArray()) {

@@ -84,7 +84,7 @@ public class Day15 {
     private int numberOfTurns;
 
     private void parseDataFile(String dataFile, int elfAttackPower) throws IOException {
-        List<String> dataLines = Files.readAllLines(Path.of(dataFile));
+        List<String> dataLines = Files.readAllLines(Main.pathFromClasspath(dataFile));
         for (int y = 0; y < dataLines.size(); y++) {
             for (int x = 0; x < dataLines.get(y).length(); x++) {
                 world.parseLocation(dataLines.get(y).charAt(x), x, y, elfAttackPower);
@@ -117,8 +117,8 @@ public class Day15 {
         System.console().readLine();
 
         // try {
-        //     Files.createDirectories(Path.of("log", "day15"));
-        //     Path log = Path.of("log", "day15", "turn" + numberOfTurns + ".txt");
+        //     Files.createDirectories(Main.pathFromClasspath("log", "day15"));
+        //     Path log = Main.pathFromClasspath("log", "day15", "turn" + numberOfTurns + ".txt");
         //     Files.write(log, status.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         //     Files.write(log, world.toString().getBytes(), StandardOpenOption.APPEND);
         //     Files.write(log, StringUtils.join(world.getUnits(), '\n').getBytes(), StandardOpenOption.APPEND);

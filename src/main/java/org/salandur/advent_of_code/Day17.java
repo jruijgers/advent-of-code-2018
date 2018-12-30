@@ -29,17 +29,17 @@ public class Day17 {
     private static final Character STILL_WATER = '~';
 
     public static void main(String[] args) throws IOException {
-        // Files.createDirectories(Path.of("log", "day17"));
+        // Files.createDirectories(Main.pathFromClasspath("log", "day17"));
 
         Day17 day17 = new Day17();
         day17.parseFile("src/main/resources/day17.txt");
 
-        // day17.printGround(Files.newOutputStream(Path.of("log", "day17", "start.txt"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING));
+        // day17.printGround(Files.newOutputStream(Main.pathFromClasspath("log", "day17", "start.txt"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING));
 
         day17.letTheWaterFlow(0);
         day17.validate();
 
-        // day17.printGround(Files.newOutputStream(Path.of("log", "day17", "result.txt"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING));
+        // day17.printGround(Files.newOutputStream(Main.pathFromClasspath("log", "day17", "result.txt"), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING));
     }
 
     Map<Integer, Map<Integer, Character>> groundCompound = new TreeMap<>();
@@ -51,7 +51,7 @@ public class Day17 {
     private WaterFlow current;
 
     private Day17 parseFile(String input) throws IOException {
-        Files.lines(Path.of(input)).forEach(this::parseLine);
+        Files.lines(Main.pathFromClasspath(input)).forEach(this::parseLine);
 
         minY = groundCompound.keySet().stream().mapToInt(Integer::intValue).min().getAsInt();
         maxY = groundCompound.keySet().stream().mapToInt(Integer::intValue).max().getAsInt();

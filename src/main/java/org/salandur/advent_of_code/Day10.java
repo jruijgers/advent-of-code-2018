@@ -16,7 +16,7 @@ public class Day10 {
     private static final Pattern LIGHT_PARSER = Pattern.compile("position=<([- ]?\\d+), ([- ]?\\d+)> velocity=<([- ]?\\d+), ([- ]?\\d+)>");
 
     public static void main(String[] args) throws IOException {
-        List<Light> lights = Files.lines(Path.of("src/main/resources/day10.txt")).map(Day10::parseLight).collect(toList());
+        List<Light> lights = Files.lines(Main.pathFromClasspath("/day10.txt")).map(Day10::parseLight).collect(toList());
 
         int elapsedSeconds = 0;
         while (getMessageHeight(lights) > 10) {

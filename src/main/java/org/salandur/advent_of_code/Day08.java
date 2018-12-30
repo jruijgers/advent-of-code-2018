@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toCollection;
 
 public class Day08 {
     public static void main(String[] args) throws IOException {
-        String licenseDataText = Files.readAllLines(Path.of("src/main/resources/day08.txt")).get(0);
+        String licenseDataText = Files.readAllLines(Main.pathFromClasspath("/day08.txt")).get(0);
 
         Queue<Integer> licenseData = Arrays.stream(StringUtils.split(licenseDataText)).map(Integer::valueOf).collect(toCollection(LinkedList::new));
 

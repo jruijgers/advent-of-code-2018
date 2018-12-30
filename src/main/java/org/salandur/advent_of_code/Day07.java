@@ -19,7 +19,7 @@ public class Day07 {
     public static void main(String[] args) throws IOException {
         Map<String, Instruction> instructionsMap = new HashMap<>();
 
-        Files.lines(Path.of("src/main/resources/day07.txt")).
+        Files.lines(Main.pathFromClasspath("/day07.txt")).
                 filter(StringUtils::isNotBlank).
                 forEach(s -> parseInstruction(s, instructionsMap));
 

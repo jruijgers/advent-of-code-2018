@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Day01 {
     public static void main(String[] args) throws IOException {
-        Path day1 = Path.of("src/main/resources/day01.txt");
+        Path day1 = Main.pathFromClasspath("/day01.txt");
 
         System.out.printf("Day 1.1: Resulting frequency: %d\n", findResultingFrequency(day1));
 

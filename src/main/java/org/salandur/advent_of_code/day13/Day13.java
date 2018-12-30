@@ -1,5 +1,7 @@
 package org.salandur.advent_of_code.day13;
 
+import org.salandur.advent_of_code.Main;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,7 +60,7 @@ public class Day13 {
         LinkedList<List<Character>> tracks = new LinkedList<>();
         this.carts = new ArrayList<>();
 
-        List<String> data = Files.readAllLines(Path.of(dataFile));
+        List<String> data = Files.readAllLines(Main.pathFromClasspath(dataFile));
         for (String s : data) {
             tracks.add(new ArrayList<>());
 

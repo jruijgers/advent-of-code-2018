@@ -18,7 +18,7 @@ public class Day03 {
     private static final Integer FABRIC_HEIGHT = 1000;
 
     public static void main(String[] args) throws IOException {
-        List<String> day3input = Files.readAllLines(Path.of("src/main/resources/day03.txt"));
+        List<String> day3input = Files.readAllLines(Main.pathFromClasspath("/day03.txt"));
 
         // discover amount of fabric claimed multiple times
         List<FabricClaim> fabricClaims = day3input.stream().map(Day03::parseFabricClaim).collect(Collectors.toList());
