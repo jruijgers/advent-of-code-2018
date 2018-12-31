@@ -29,9 +29,12 @@ public class Day20 {
     }
 
     private Path path = new Path();
+    private List<String> allPaths;
 
     private void part1(int expectedLength) {
-        int longestPath = path.getLongestPathLength();
+        allPaths = path.getPathStrings();
+
+        int longestPath = allPaths.parallelStream().mapToInt(String::length).max().getAsInt();
         System.out.printf("Day 20.1: the longest path is %d", longestPath);
         if (expectedLength > 0 && longestPath != expectedLength) {
             System.out.printf(" (expected %d!)", expectedLength);
@@ -40,9 +43,6 @@ public class Day20 {
     }
 
     private void part2(int minLength) {
-        List<String> allPaths = path.getPathStrings();
-        // System.out.println(StringUtils.join(allPaths, '\n'));
-
         long pathsWithMinLength = allPaths.parallelStream().filter(s -> s.length() >= minLength).count();
         System.out.printf("Day 20.2: there are %d paths with a minimum length of %d\n", pathsWithMinLength, minLength);
     }

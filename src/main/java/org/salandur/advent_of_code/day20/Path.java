@@ -22,30 +22,6 @@ public class Path {
         return directions.stream().mapToInt(PathElement::getPathLength).sum();
     }
 
-    public int getLongestPathLength() {
-        return directions.stream().mapToInt(PathElement::getLongestPathLength).sum();
-    }
-
-    public String getPathLengths() {
-        StringBuilder b = new StringBuilder();
-        int count = 0;
-        for (PathElement p : directions) {
-            if (p instanceof Direction) {
-                count++;
-            } else {
-                if (count > 0) {
-                    b.append(count);
-                }
-                count = 0;
-                b.append(p.getPathLengths());
-            }
-        }
-        if (b.length() == 0 || count > 0) {
-            b.append(count);
-        }
-        return b.toString();
-    }
-
     public List<String> getPathStrings() {
         return getPathStrings("");
     }

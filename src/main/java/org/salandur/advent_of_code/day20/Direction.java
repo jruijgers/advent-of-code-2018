@@ -48,16 +48,6 @@ public class Direction implements PathElement {
     }
 
     @Override
-    public int getLongestPathLength() {
-        return 1;
-    }
-
-    @Override
-    public String getPathLengths() {
-        return "1";
-    }
-
-    @Override
     public String toString() {
         return "" + indicator;
     }

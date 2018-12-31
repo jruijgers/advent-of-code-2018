@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class Group implements PathElement {
     private final Path parent;
     private final LinkedList<Path> paths = new LinkedList<>();
@@ -19,11 +17,6 @@ public class Group implements PathElement {
     @Override
     public int getPathLength() {
         return paths.parallelStream().mapToInt(Path::getPathLength).sum();
-    }
-
-    @Override
-    public int getLongestPathLength() {
-        return isCyclic() ? 0 : paths.parallelStream().mapToInt(Path::getLongestPathLength).max().getAsInt();
     }
 
     private boolean isCyclic() {
@@ -57,15 +50,6 @@ public class Group implements PathElement {
 
         return ps;
 
-    }
-
-    @Override
-    public String getPathLengths() {
-        StringBuilder b = new StringBuilder();
-        b.append('(');
-        b.append(StringUtils.join(paths.stream().map(p -> p.getPathLengths()).collect(toList()), '|'));
-        b.append(')');
-        return b.toString();
     }
 
     public Path newPath() {
