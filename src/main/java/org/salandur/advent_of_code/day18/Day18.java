@@ -19,11 +19,11 @@ public class Day18 {
 
     public static void main(String[] args) throws IOException {
         new Day18().
-                parseFile("src/main/resources/day18.txt").
+                parseFile(",/day18.txt").
                 run(10).
                 showResults();
 
-        new Day18().parseFile("src/main/resources/day18.txt").
+        new Day18().parseFile("/day18.txt").
                 run(1000000000).
                 showResults();
     }

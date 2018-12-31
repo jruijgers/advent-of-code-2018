@@ -12,12 +12,12 @@ public class Day19 {
     public static void main(String[] args) throws IOException {
         Day19 day19 = new Day19();
 
-        //day19.parseInput("src/main/resources/day19.example.txt");
+        //day19.parseInput("/day19.example.txt");
 
         // Original program
-        // day19.parseInput("src/main/resources/day19.txt");
+        // day19.parseInput("/day19.txt");
         // Optimized program
-        day19.parseInput("src/main/resources/day19.optimized.txt");
+        day19.parseInput("/day19.optimized.txt");
         day19.reset(0);
         day19.run();
         day19.reset(1);

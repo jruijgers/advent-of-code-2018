@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 public class Day13 {
 
     public static void main(String[] args) throws IOException {
-        new Day13("src/main/resources/day13.txt").run();
+        new Day13("/day13.txt").run();
     }
 
     private String dataFile;
