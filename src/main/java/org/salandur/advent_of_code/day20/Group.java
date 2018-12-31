@@ -2,11 +2,13 @@ package org.salandur.advent_of_code.day20;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class Group implements PathPart {
+public class Group implements PathElement {
     private final Path parent;
     private final LinkedList<Path> paths = new LinkedList<>();
 
@@ -34,6 +36,30 @@ public class Group implements PathPart {
     }
 
     @Override
+    public List<String> getPathStrings(String head, List<PathElement> tail) {
+        List<String> ps = new ArrayList<>();
+
+        if (isCyclic()) {
+            for (Path p : paths) {
+                if (p.getPathLength() > 0) {
+                    ps.addAll(p.getPathStrings(head));
+                }
+            }
+            if (!tail.isEmpty()) {
+                PathElement p = tail.remove(0);
+                ps.addAll(p.getPathStrings(head, tail));
+            }
+        } else {
+            for (Path p : paths) {
+                ps.addAll(p.getPathStrings(head, tail));
+            }
+        }
+
+        return ps;
+
+    }
+
+    @Override
     public String getPathLengths() {
         StringBuilder b = new StringBuilder();
         b.append('(');
@@ -46,10 +72,6 @@ public class Group implements PathPart {
         Path p = new Path(this);
         paths.add(p);
         return p;
-    }
-
-    public Path lastPath() {
-        return paths.getLast();
     }
 
     public Path getParent() {

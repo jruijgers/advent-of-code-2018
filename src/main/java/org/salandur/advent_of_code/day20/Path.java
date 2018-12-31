@@ -2,11 +2,13 @@ package org.salandur.advent_of_code.day20;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
-public class Path implements PathPart {
+public class Path {
     private final Group parent;
-    private final LinkedList<PathPart> directions = new LinkedList<>();
+    private final LinkedList<PathElement> directions = new LinkedList<>();
 
     public Path() {
         this(null);
@@ -16,20 +18,18 @@ public class Path implements PathPart {
         this.parent = parent;
     }
 
-    @Override
     public int getPathLength() {
-        return directions.stream().mapToInt(PathPart::getPathLength).sum();
+        return directions.stream().mapToInt(PathElement::getPathLength).sum();
     }
 
     public int getLongestPathLength() {
-        return directions.stream().mapToInt(PathPart::getLongestPathLength).sum();
+        return directions.stream().mapToInt(PathElement::getLongestPathLength).sum();
     }
 
-    @Override
     public String getPathLengths() {
         StringBuilder b = new StringBuilder();
         int count = 0;
-        for (PathPart p : directions) {
+        for (PathElement p : directions) {
             if (p instanceof Direction) {
                 count++;
             } else {
@@ -44,6 +44,41 @@ public class Path implements PathPart {
             b.append(count);
         }
         return b.toString();
+    }
+
+    public List<String> getPathStrings() {
+        return getPathStrings("");
+    }
+
+    public List<String> getPathStrings(String head) {
+        return getPathStringsInternal(head, new ArrayList<>(directions));
+    }
+
+    public List<String> getPathStrings(String head, List<PathElement> tail) {
+        List<PathElement> elements = new ArrayList<>(directions);
+        elements.addAll(tail);
+        return getPathStringsInternal(head, elements);
+    }
+
+    public List<String> getPathStringsInternal(String head, List<PathElement> tail) {
+        LinkedList<String> pathStrings = new LinkedList<>();
+        while (!tail.isEmpty()) {
+            PathElement p = tail.remove(0);
+
+            if (p instanceof Direction) {
+                if (Direction.canAddDirection(head, (Direction) p)) {
+                    head = head + p;
+                    // System.out.println(head);
+                    pathStrings.add(head);
+
+                } else {
+                    break;
+                }
+            } else { // Group
+                pathStrings.addAll(((Group) p).getPathStrings(head, tail));
+            }
+        }
+        return pathStrings;
     }
 
     public void add(Character direction) {
