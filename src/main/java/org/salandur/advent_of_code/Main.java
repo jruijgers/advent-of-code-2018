@@ -4,6 +4,7 @@ import org.salandur.advent_of_code.day12.Day12;
 import org.salandur.advent_of_code.day13.Day13;
 import org.salandur.advent_of_code.day15.Day15;
 import org.salandur.advent_of_code.day18.Day18;
+import org.salandur.advent_of_code.day20.Day20;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
